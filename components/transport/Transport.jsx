@@ -1,5 +1,5 @@
 import { View, StyleSheet } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import HomeBtn from './HomeBtn';
 import EndBtn from './EndBtn';
 import RecordBtn from './RecordBtn';
@@ -9,18 +9,26 @@ import StopBtn from './StopBtn';
 import PauseBtn from './PauseBtn';
 
 export default function Transport() {
+  const [transportState, setTransportState] = useState({
+    recording: false,
+    playing: false,
+    repeat: false,
+    paused: false,
+  });
+
   return (
     <View style={styles.container}>
       <HomeBtn />
       <EndBtn />
-      <RecordBtn active={false} />
-      <PlayBtn active={false} />
-      <RepeatBtn active={false} />
+      <RecordBtn active={transportState.recording} />
+      <PlayBtn active={transportState.playing} />
+      <RepeatBtn active={transportState.repeat} />
       <StopBtn />
-      <PauseBtn active={false} />
+      <PauseBtn active={transportState.paused} />
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
