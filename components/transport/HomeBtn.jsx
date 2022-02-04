@@ -1,12 +1,13 @@
 import { Image, TouchableWithoutFeedback } from 'react-native';
 import React from 'react';
+import axios from 'axios';
 
 export default function HomeBtn(props) {
   const icon = require('../../assets/transport/transport_home.png');
 
   function handlePress(event) {
     axios
-      .get('/')
+      .get('/transport/home')
       .then((response) =>
         console.log(
           response.request._method,

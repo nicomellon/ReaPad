@@ -1,12 +1,13 @@
 import { Image, TouchableWithoutFeedback } from 'react-native';
 import React from 'react';
+import axios from 'axios';
 
 export default function EndBtn(props) {
   const icon = require('../../assets/transport/transport_end.png');
 
   function handlePress(event) {
     axios
-      .get('/')
+      .get('/transport/end')
       .then((response) =>
         console.log(
           response.request._method,

@@ -1,10 +1,5 @@
 import axios from 'axios';
-import {
-  StyleSheet,
-  TouchableWithoutFeedback,
-  Image,
-  View,
-} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Transport from './components/transport/Transport';
 
 axios.defaults.baseURL = 'http://192.168.1.57:8080';
@@ -20,7 +15,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#333333',
     alignItems: 'center',
     justifyContent: 'center',
   },

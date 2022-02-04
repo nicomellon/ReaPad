@@ -1,5 +1,6 @@
 import { Image, TouchableWithoutFeedback } from 'react-native';
 import React from 'react';
+import axios from 'axios';
 
 export default function PlayBtn(props) {
   const { active } = props;
@@ -9,7 +10,7 @@ export default function PlayBtn(props) {
 
   function handlePress(event) {
     axios
-      .get('/')
+      .get('/transport/play')
       .then((response) =>
         console.log(
           response.request._method,
