@@ -10,17 +10,25 @@ axios.defaults.baseURL = 'http://192.168.1.57:8080';
 
 export default function App() {
   function handlePress(event) {
-    console.log('hi');
     axios
       .get('/')
-      .then((response) => console.log(response))
+      .then((response) =>
+        console.log(
+          response.request._method,
+          response.request.responseURL,
+          response.status
+        )
+      )
       .catch((err) => console.log(err));
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <TouchableWithoutFeedback onPress={handlePress}>
-        <Image style={styles.play} source={require('./assets/gen_play.png')} />
+        <Image
+          style={styles.ui}
+          source={require('./assets/transport/gen_play.png')}
+        />
       </TouchableWithoutFeedback>
     </SafeAreaView>
   );
@@ -33,8 +41,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  play: {
-    width: 72,
-    height: 24,
+  ui: {
+    width: 48,
+    height: 48,
   },
 });
