@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {
   StyleSheet,
   TouchableWithoutFeedback,
@@ -5,12 +6,20 @@ import {
   SafeAreaView,
 } from 'react-native';
 
+axios.defaults.baseURL = 'http://192.168.1.57:8080';
+
 export default function App() {
-  console.log(require('./assets/gen_play.png'));
+  function handlePress(event) {
+    console.log('hi');
+    axios
+      .get('/')
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
+  }
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableWithoutFeedback onPress={() => console.log('image tapped')}>
+      <TouchableWithoutFeedback onPress={handlePress}>
         <Image style={styles.play} source={require('./assets/gen_play.png')} />
       </TouchableWithoutFeedback>
     </SafeAreaView>
