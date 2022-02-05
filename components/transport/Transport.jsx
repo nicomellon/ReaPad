@@ -1,5 +1,6 @@
 import { View, StyleSheet } from 'react-native';
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { TransportContext } from '../../context/transport.context';
 import HomeBtn from './HomeBtn';
 import EndBtn from './EndBtn';
 import RecordBtn from './RecordBtn';
@@ -9,22 +10,18 @@ import StopBtn from './StopBtn';
 import PauseBtn from './PauseBtn';
 
 export default function Transport() {
-  const [transportState, setTransportState] = useState({
-    recording: false,
-    playing: false,
-    repeat: false,
-    paused: false,
-  });
+  const transport = useContext(TransportContext);
+  console.log('ransctx', transport);
 
   return (
     <View style={styles.container}>
       <HomeBtn />
       <EndBtn />
-      <RecordBtn active={transportState.recording} />
-      <PlayBtn active={transportState.playing} />
-      <RepeatBtn active={transportState.repeat} />
+      <RecordBtn active={transport.recording} />
+      <PlayBtn active={transport.playing} />
+      <RepeatBtn active={transport.repeat} />
       <StopBtn />
-      <PauseBtn active={transportState.paused} />
+      <PauseBtn active={transport.paused} />
     </View>
   );
 }

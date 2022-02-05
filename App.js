@@ -1,20 +1,34 @@
 import { useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, NativeEventEmitter } from 'react-native';
 import Osc from 'react-native-osc';
+import { TransportProviderWrapper } from './context/transport.context';
 import Transport from './components/transport/Transport';
 
 //OSC server IP address and port
-const address = '192.168.1.136';
-const portOut = 9090;
+const SEND_ADDRESS = '192.168.1.136';
+const SEND_PORT = 9090;
+const LISTEN_PORT = 9999;
 
 export default function App() {
   useEffect(() => {
-    Osc.createClient(address, portOut);
+    //create an event emiter sending the native osc module as parameter
+    const eventEmitter = new NativeEventEmitter(Osc);
+
+    //subscribe to GotMessage event to receive OSC messages
+    eventEmitter.addListener('GotMessage', (oscMessage) =>
+      console.log(oscMessage)
+    );
+
+    //create the client & server
+    Osc.createClient(SEND_ADDRESS, SEND_PORT);
+    Osc.createServer(LISTEN_PORT);
   }, []);
 
   return (
     <View style={styles.container}>
-      <Transport />
+      <TransportProviderWrapper>
+        <Transport />
+      </TransportProviderWrapper>
     </View>
   );
 }
