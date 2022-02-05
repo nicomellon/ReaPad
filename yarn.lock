@@ -4501,6 +4501,11 @@ react-native-codegen@^0.0.6:
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
 
+react-native-osc@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-osc/-/react-native-osc-0.0.4.tgz#1118f0d185830be616fb7bd8ed84a397bb3da487"
+  integrity sha512-Ddo2+T+RybNpdY3gbB3iA8Sy8mvIqXBUTQVxTwUeIJ26Pz9xQ6RdwKeSd9odWpjI45yoygYHHYzNMkD7/vajfw==
+
 react-native-web@0.17.1:
   version "0.17.1"
   resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.17.1.tgz#90d473c89dd99b88bc9830b2a9fcdd2fc5f04902"
