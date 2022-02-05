@@ -12,24 +12,6 @@ function TransportProviderWrapper(props) {
     paused: false,
   });
 
-  const startPlayback = () => {
-    setTransport({
-      recording: false,
-      playing: true,
-      repeat: false,
-      paused: false,
-    });
-  };
-
-  const stopPlayback = () => {
-    setTransport({
-      recording: false,
-      playing: false,
-      repeat: false,
-      paused: false,
-    });
-  };
-
   return (
     <TransportContext.Provider value={transport}>
       {props.children}
@@ -37,9 +19,4 @@ function TransportProviderWrapper(props) {
   );
 }
 
-export {
-  TransportContext,
-  TransportProviderWrapper,
-  startPlayback,
-  stopPlayback,
-};
+export { TransportContext, TransportProviderWrapper };
