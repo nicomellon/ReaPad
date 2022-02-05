@@ -1,6 +1,6 @@
 import { Image, TouchableWithoutFeedback } from 'react-native';
 import React from 'react';
-import axios from 'axios';
+import Osc from 'react-native-osc';
 
 export default function PlayBtn(props) {
   const { active } = props;
@@ -8,18 +8,7 @@ export default function PlayBtn(props) {
     ? require('../../assets/transport/transport_play_on.png')
     : require('../../assets/transport/transport_play.png');
 
-  function handlePress(event) {
-    axios
-      .get('/transport/play')
-      .then((response) =>
-        console.log(
-          response.request._method,
-          response.request.responseURL,
-          response.status
-        )
-      )
-      .catch((err) => console.log(err));
-  }
+  const handlePress = () => Osc.sendMessage('/play', []);
 
   return (
     <TouchableWithoutFeedback onPress={handlePress}>

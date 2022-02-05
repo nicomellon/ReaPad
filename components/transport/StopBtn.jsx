@@ -1,22 +1,11 @@
 import { Image, TouchableWithoutFeedback } from 'react-native';
 import React from 'react';
-import axios from 'axios';
+import Osc from 'react-native-osc';
 
 export default function StopBtn(props) {
   const icon = require('../../assets/transport/transport_stop.png');
 
-  function handlePress(event) {
-    axios
-      .get('/transport/stop')
-      .then((response) =>
-        console.log(
-          response.request._method,
-          response.request.responseURL,
-          response.status
-        )
-      )
-      .catch((err) => console.log(err));
-  }
+  const handlePress = () => Osc.sendMessage('/stop', []);
 
   return (
     <TouchableWithoutFeedback onPress={handlePress}>
