@@ -12,9 +12,9 @@ export default function Transport() {
     <View style={styles.container}>
       <HomeBtn />
       <EndBtn />
-      <RecordBtn active={false} />
-      <PlayBtn active={false} />
-      <RepeatBtn active={false} />
+      <RecordBtn />
+      <PlayBtn />
+      <RepeatBtn />
       <StopBtn />
       <PauseBtn />
     </View>

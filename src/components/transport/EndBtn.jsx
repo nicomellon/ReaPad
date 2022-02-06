@@ -1,15 +1,24 @@
-import { Image, TouchableWithoutFeedback } from 'react-native';
-import React from 'react';
+import { Image, Pressable } from 'react-native';
+import { useState } from 'react';
 import Osc from 'react-native-osc';
 
-export default function EndBtn(props) {
-  const icon = require('../../assets/transport/default/transport_end.png');
+export default function EndBtn() {
+  const [pressed, setPressed] = useState(false);
 
-  const handlePress = () => Osc.sendMessage('/action', [40043]);
+  const icon = pressed
+    ? require('../../assets/transport/pressed/transport_end.png')
+    : require('../../assets/transport/default/transport_end.png');
+
+  const handlePressIn = () => setPressed(true);
+
+  const handlePressOut = () => {
+    Osc.sendMessage('/action', [40043]);
+    setPressed(false);
+  };
 
   return (
-    <TouchableWithoutFeedback onPress={handlePress}>
+    <Pressable onPressIn={handlePressIn} onPressOut={handlePressOut}>
       <Image source={icon} />
-    </TouchableWithoutFeedback>
+    </Pressable>
   );
 }

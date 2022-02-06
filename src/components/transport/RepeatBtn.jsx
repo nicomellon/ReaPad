@@ -1,18 +1,35 @@
-import { Image, TouchableWithoutFeedback } from 'react-native';
-import React from 'react';
+import { Image, Pressable } from 'react-native';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Osc from 'react-native-osc';
 
-export default function RepeatBtn(props) {
-  const { active } = props;
-  const icon = active
-    ? require('../../assets/transport/default/transport_repeat_on.png')
-    : require('../../assets/transport/default/transport_repeat_off.png');
+const selectState = (state) => state['/repeat'];
 
-  const handlePress = () => Osc.sendMessage('/repeat', []);
+export default function RepeatBtn() {
+  const active = useSelector(selectState);
+  const [pressed, setPressed] = useState(false);
+
+  let icon;
+
+  if (active[0] === 0)
+    icon = pressed
+      ? require('../../assets/transport/pressed/transport_repeat_off.png')
+      : require('../../assets/transport/default/transport_repeat_off.png');
+  else
+    icon = pressed
+      ? require('../../assets/transport/pressed/transport_repeat_on.png')
+      : require('../../assets/transport/default/transport_repeat_on.png');
+
+  const handlePressIn = () => setPressed(true);
+
+  const handlePressOut = () => {
+    Osc.sendMessage('/repeat', []);
+    setPressed(false);
+  };
 
   return (
-    <TouchableWithoutFeedback onPress={handlePress}>
+    <Pressable onPressIn={handlePressIn} onPressOut={handlePressOut}>
       <Image source={icon} />
-    </TouchableWithoutFeedback>
+    </Pressable>
   );
 }

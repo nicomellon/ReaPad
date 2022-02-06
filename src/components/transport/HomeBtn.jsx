@@ -1,15 +1,24 @@
-import { Image, TouchableWithoutFeedback } from 'react-native';
-import React from 'react';
+import { Image, Pressable } from 'react-native';
+import { useState } from 'react';
 import Osc from 'react-native-osc';
 
 export default function HomeBtn(props) {
-  const icon = require('../../assets/transport/default/transport_home.png');
+  const [pressed, setPressed] = useState(false);
 
-  const handlePress = () => Osc.sendMessage('/action', [40042]);
+  const icon = pressed
+    ? require('../../assets/transport/pressed/transport_home.png')
+    : require('../../assets/transport/default/transport_home.png');
+
+  const handlePressIn = () => setPressed(true);
+
+  const handlePressOut = () => {
+    Osc.sendMessage('/action', [40042]);
+    setPressed(false);
+  };
 
   return (
-    <TouchableWithoutFeedback onPress={handlePress}>
+    <Pressable onPressIn={handlePressIn} onPressOut={handlePressOut}>
       <Image source={icon} />
-    </TouchableWithoutFeedback>
+    </Pressable>
   );
 }
