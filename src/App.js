@@ -1,15 +1,16 @@
+import { useEffect } from 'react';
 import { StyleSheet, SafeAreaView } from 'react-native';
-import { ReaperProviderWrapper } from './context/reaper.context';
 import Transport from './components/transport/Transport';
-import CreateOscConnection from './components/osc/CreateOscConnection';
+import createOscConnection from './osc/CreateOscConnection';
 
 export default function App() {
+  useEffect(() => {
+    createOscConnection();
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
-      <ReaperProviderWrapper>
-        <CreateOscConnection />
-        <Transport />
-      </ReaperProviderWrapper>
+      <Transport />
     </SafeAreaView>
   );
 }

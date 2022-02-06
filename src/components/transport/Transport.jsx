@@ -1,6 +1,4 @@
 import { View, StyleSheet } from 'react-native';
-import React, { useContext, useEffect, useState } from 'react';
-import { ReaperContext } from '../../context/reaper.context';
 import HomeBtn from './HomeBtn';
 import EndBtn from './EndBtn';
 import RecordBtn from './RecordBtn';
@@ -10,9 +8,6 @@ import StopBtn from './StopBtn';
 import PauseBtn from './PauseBtn';
 
 export default function Transport() {
-  const { value } = useContext(ReaperContext);
-  console.log('reaper ctx ->', value);
-
   return (
     <View style={styles.container}>
       <HomeBtn />
