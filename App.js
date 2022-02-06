@@ -5,9 +5,9 @@ import { TransportProviderWrapper } from './context/transport.context';
 import Transport from './components/transport/Transport';
 
 //OSC server IP address and port
-const SEND_ADDRESS = '192.168.1.136';
-const SEND_PORT = 9090;
-const LISTEN_PORT = 9999;
+const SEND_ADDRESS = '192.168.1.57';
+const SEND_PORT = 8000;
+const LISTEN_PORT = 9000;
 
 export default function App() {
   useEffect(() => {
