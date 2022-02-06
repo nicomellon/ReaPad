@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { StyleSheet, View, NativeEventEmitter } from 'react-native';
+import { StyleSheet, SafeAreaView, NativeEventEmitter } from 'react-native';
 import Osc from 'react-native-osc';
 import { TransportProviderWrapper } from './context/transport.context';
 import Transport from './components/transport/Transport';
@@ -25,11 +25,11 @@ export default function App() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <TransportProviderWrapper>
         <Transport />
       </TransportProviderWrapper>
-    </View>
+    </SafeAreaView>
   );
 }
 
