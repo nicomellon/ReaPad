@@ -14,13 +14,16 @@ export default function CreateOscConnection() {
   //create an event emiter sending the native osc module as parameter
   const eventEmitter = new NativeEventEmitter(Osc);
 
+  let reaCtx = {};
+
   //subscribe to GotMessage event to receive OSC messages
   eventEmitter.addListener('GotMessage', (oscMessage) => {
     const { address, data } = oscMessage;
-    console.group('oscMessage ->');
-    console.log('address: ', address);
-    console.log('data: ', data);
-    console.groupEnd();
+    console.log({ oscMessage });
+
+    // setValue({ ...value, [address]: data });
+    reaCtx = { ...reaCtx, [address]: data };
+    console.log({ reaCtx });
   });
 
   //create the client & server
