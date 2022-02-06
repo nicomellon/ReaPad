@@ -1,7 +1,12 @@
 import { useEffect } from 'react';
 import { StyleSheet, SafeAreaView } from 'react-native';
+
 import Transport from './components/transport/Transport';
+
 import createOscConnection from './osc/CreateOscConnection';
+
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 export default function App() {
   useEffect(() => {
@@ -9,9 +14,11 @@ export default function App() {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Transport />
-    </SafeAreaView>
+    <Provider store={store}>
+      <SafeAreaView style={styles.container}>
+        <Transport />
+      </SafeAreaView>
+    </Provider>
   );
 }
 

@@ -1,3 +1,5 @@
+import * as actions from './actionTypes';
+
 const initialState = {
   '/play': [0],
   '/pause': [0],
@@ -12,7 +14,7 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
-  if (action.type === 'oscMsgReceived') {
+  if (action.type === actions.OSC_MSG) {
     return {
       ...state,
       [action.payload.address]: action.payload.data,

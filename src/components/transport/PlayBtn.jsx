@@ -1,10 +1,13 @@
 import { Image, TouchableWithoutFeedback } from 'react-native';
-import React from 'react';
+import { useSelector } from 'react-redux';
 import Osc from 'react-native-osc';
 
-export default function PlayBtn(props) {
-  const { active } = props;
-  const icon = active
+const selectState = (state) => state['/play'];
+
+export default function PlayBtn() {
+  const active = useSelector(selectState);
+
+  const icon = active[0]
     ? require('../../assets/transport/transport_play_on.png')
     : require('../../assets/transport/transport_play.png');
 

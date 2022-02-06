@@ -16,7 +16,7 @@ export default function Transport() {
       <PlayBtn active={false} />
       <RepeatBtn active={false} />
       <StopBtn />
-      <PauseBtn active={false} />
+      <PauseBtn />
     </View>
   );
 }
