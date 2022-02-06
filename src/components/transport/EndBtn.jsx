@@ -3,7 +3,7 @@ import React from 'react';
 import Osc from 'react-native-osc';
 
 export default function EndBtn(props) {
-  const icon = require('../../assets/transport/transport_end.png');
+  const icon = require('../../assets/transport/default/transport_end.png');
 
   const handlePress = () => Osc.sendMessage('/action', [40043]);
 

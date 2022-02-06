@@ -3,7 +3,7 @@ import React from 'react';
 import Osc from 'react-native-osc';
 
 export default function StopBtn(props) {
-  const icon = require('../../assets/transport/transport_stop.png');
+  const icon = require('../../assets/transport/default/transport_stop.png');
 
   const handlePress = () => Osc.sendMessage('/stop', []);
 

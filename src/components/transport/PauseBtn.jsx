@@ -5,8 +5,8 @@ import Osc from 'react-native-osc';
 export default function PauseBtn(props) {
   const { active } = props;
   const icon = active
-    ? require('../../assets/transport/transport_pause_on.png')
-    : require('../../assets/transport/transport_pause.png');
+    ? require('../../assets/transport/default/transport_pause_on.png')
+    : require('../../assets/transport/default/transport_pause.png');
 
   const handlePress = () => Osc.sendMessage('/pause', []);
 

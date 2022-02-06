@@ -5,8 +5,8 @@ import Osc from 'react-native-osc';
 export default function RepeatBtn(props) {
   const { active } = props;
   const icon = active
-    ? require('../../assets/transport/transport_repeat_on.png')
-    : require('../../assets/transport/transport_repeat_off.png');
+    ? require('../../assets/transport/default/transport_repeat_on.png')
+    : require('../../assets/transport/default/transport_repeat_off.png');
 
   const handlePress = () => Osc.sendMessage('/repeat', []);
 
