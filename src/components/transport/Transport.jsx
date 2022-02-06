@@ -1,6 +1,6 @@
 import { View, StyleSheet } from 'react-native';
 import React, { useContext } from 'react';
-import { TransportContext } from '../../context/transport.context';
+import { ReaperContext } from '../../context/reaper.context';
 import HomeBtn from './HomeBtn';
 import EndBtn from './EndBtn';
 import RecordBtn from './RecordBtn';
@@ -10,18 +10,18 @@ import StopBtn from './StopBtn';
 import PauseBtn from './PauseBtn';
 
 export default function Transport() {
-  const transport = useContext(TransportContext);
-  console.log('ransctx', transport);
+  const { value } = useContext(ReaperContext);
+  console.log('ransctx', value);
 
   return (
     <View style={styles.container}>
       <HomeBtn />
       <EndBtn />
-      <RecordBtn active={transport.recording} />
-      <PlayBtn active={transport.playing} />
-      <RepeatBtn active={transport.repeat} />
+      <RecordBtn active={value.recording} />
+      <PlayBtn active={value.playing} />
+      <RepeatBtn active={value.repeat} />
       <StopBtn />
-      <PauseBtn active={transport.paused} />
+      <PauseBtn active={value.paused} />
     </View>
   );
 }
