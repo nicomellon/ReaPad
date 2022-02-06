@@ -1,6 +1,20 @@
 import { NativeEventEmitter } from 'react-native';
 import Osc from 'react-native-osc';
 
+import store from '../redux/store';
+
+const unsubscribe = store.subscribe(() => {
+  console.log('store changed!', store.getState());
+});
+
+store.dispatch({
+  type: 'oscMsgReceived',
+  payload: {
+    address: '/play',
+    data: [1],
+  },
+});
+
 export default function createOscConnection() {
   //OSC server IP address and port
   const SEND_ADDRESS = '192.168.1.136';
