@@ -18,8 +18,6 @@ export const transportSlice = createSlice({
   initialState,
   reducers: {
     setState: (state, action) => {
-      console.log('state =>', state);
-      console.log('action =>', action);
       state[action.payload.address] = action.payload.data;
     },
   },
