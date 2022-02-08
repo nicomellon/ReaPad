@@ -27,6 +27,7 @@ function TransportIcon({ icon, osc }) {
 
 function TransportIconWithFeedback({ icon, osc, active }) {
   const [pressed, setPressed] = useState(false);
+  // console.log(`component ${osc.address} rendered`);
 
   // set default icon
   let iconSrc = icon.inactive.default;
@@ -52,7 +53,6 @@ function TransportIconWithFeedback({ icon, osc, active }) {
 
 export default function Transport() {
   const state = useSelector((state) => state.transport);
-  // console.log(state);
 
   return (
     <View style={styles.container}>
