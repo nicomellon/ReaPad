@@ -11,8 +11,6 @@ export default function PlayBtn() {
   const paused = useSelector(pauseState);
   const [pressed, setPressed] = useState(false);
 
-  console.log({ playing, paused });
-
   let icon;
 
   if (playing[0] === 1 || paused[0] === 1)

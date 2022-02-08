@@ -23,24 +23,24 @@ export default function Transport() {
       />
 
       {/* record button */}
-      <TransportIconWithFeedback
+      {/* <TransportIconWithFeedback
         icon={icons.stop}
         osc={{ address: '/record', args: [] }}
         active={false}
-      />
-      <RecordBtn />
+      /> */}
+      {/* <RecordBtn /> */}
 
       {/* play button */}
-      <PlayBtn />
+      {/* <PlayBtn /> */}
 
       {/* repeat button */}
-      <RepeatBtn />
+      {/* <RepeatBtn /> */}
 
       {/* stop button */}
       <TransportIcon icon={icons.stop} osc={{ address: '/stop', args: [] }} />
 
       {/* pause button */}
-      <PauseBtn />
+      {/* <PauseBtn /> */}
     </View>
   );
 }
