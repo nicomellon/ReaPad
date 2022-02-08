@@ -1,13 +1,14 @@
 import { View, StyleSheet } from 'react-native';
-import RecordBtn from './RecordBtn';
-import PlayBtn from './PlayBtn';
-import RepeatBtn from './RepeatBtn';
-import PauseBtn from './PauseBtn';
 import TransportIcon from './TransportIcon';
 import TransportIconWithFeedback from './TransportIconWithFeedback';
 import * as icons from './icons.js';
 
+import { useSelector } from 'react-redux';
+const transportState = (state) => state.transport;
+
 export default function Transport() {
+  const state = useSelector(transportState);
+
   return (
     <View style={styles.container}>
       {/* home button */}
@@ -23,24 +24,35 @@ export default function Transport() {
       />
 
       {/* record button */}
-      {/* <TransportIconWithFeedback
-        icon={icons.stop}
+      <TransportIconWithFeedback
+        icon={icons.record}
         osc={{ address: '/record', args: [] }}
-        active={false}
-      /> */}
-      {/* <RecordBtn /> */}
+        active={state['/record'][0] === 1}
+      />
 
       {/* play button */}
-      {/* <PlayBtn /> */}
+      <TransportIconWithFeedback
+        icon={icons.play}
+        osc={{ address: '/play', args: [] }}
+        active={state['/play'][0] === 1 || state['/pause'][0] === 1}
+      />
 
       {/* repeat button */}
-      {/* <RepeatBtn /> */}
+      <TransportIconWithFeedback
+        icon={icons.repeat}
+        osc={{ address: '/repeat', args: [] }}
+        active={state['/repeat'][0] === 1}
+      />
 
       {/* stop button */}
       <TransportIcon icon={icons.stop} osc={{ address: '/stop', args: [] }} />
 
       {/* pause button */}
-      {/* <PauseBtn /> */}
+      <TransportIconWithFeedback
+        icon={icons.pause}
+        osc={{ address: '/pause', args: [] }}
+        active={state['/pause'][0] === 1}
+      />
     </View>
   );
 }

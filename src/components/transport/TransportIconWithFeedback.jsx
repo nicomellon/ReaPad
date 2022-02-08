@@ -1,25 +1,19 @@
 import { Image, Pressable } from 'react-native';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 import Osc from 'react-native-osc';
 
-const selectState = (state) => state['/record'];
-
-export default function RecordBtn({ icon, osc }) {
-  const active = useSelector(selectState);
+export default function RecordBtn({ icon, osc, active }) {
   const [pressed, setPressed] = useState(false);
+  console.log(`${osc.address} component refreshed`);
 
-  let iconSrc;
+  // set default icon
+  let iconSrc = icon.inactive.default;
 
-  if (active[0] === 0)
-    iconSrc = pressed
-      ? require('../../assets/transport/pressed/transport_record.png')
-      : require('../../assets/transport/default/transport_record.png');
-  else
-    iconSrc = pressed
-      ? require('../../assets/transport/pressed/transport_record_on.png')
-      : require('../../assets/transport/default/transport_record_on.png');
+  // update icon depending on state
+  if (active) iconSrc = pressed ? icon.active.pressed : icon.active.default;
+  else iconSrc = pressed ? icon.inactive.pressed : icon.inactive.default;
 
+  // handlers
   const handlePressIn = () => setPressed(true);
 
   const handlePressOut = () => {

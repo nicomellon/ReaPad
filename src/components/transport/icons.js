@@ -23,3 +23,36 @@ export const record = {
     pressed: require('../../assets/transport/pressed/transport_record_on.png'),
   },
 };
+
+export const play = {
+  inactive: {
+    default: require('../../assets/transport/default/transport_play.png'),
+    pressed: require('../../assets/transport/pressed/transport_play.png'),
+  },
+  active: {
+    default: require('../../assets/transport/default/transport_play_on.png'),
+    pressed: require('../../assets/transport/pressed/transport_play_on.png'),
+  },
+};
+
+export const repeat = {
+  inactive: {
+    default: require('../../assets/transport/default/transport_repeat_off.png'),
+    pressed: require('../../assets/transport/pressed/transport_repeat_off.png'),
+  },
+  active: {
+    default: require('../../assets/transport/default/transport_repeat_on.png'),
+    pressed: require('../../assets/transport/pressed/transport_repeat_on.png'),
+  },
+};
+
+export const pause = {
+  inactive: {
+    default: require('../../assets/transport/default/transport_pause.png'),
+    pressed: require('../../assets/transport/pressed/transport_pause.png'),
+  },
+  active: {
+    default: require('../../assets/transport/default/transport_pause_on.png'),
+    pressed: require('../../assets/transport/pressed/transport_pause_on.png'),
+  },
+};

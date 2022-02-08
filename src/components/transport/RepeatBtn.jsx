@@ -11,7 +11,9 @@ export default function RepeatBtn() {
 
   let icon;
 
-  if (active[0] === 0)
+  console.log(active);
+
+  if (active)
     icon = pressed
       ? require('../../assets/transport/pressed/transport_repeat_off.png')
       : require('../../assets/transport/default/transport_repeat_off.png');
