@@ -1,13 +1,14 @@
 import { View, StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
 import TransportIcon from './TransportIcon';
 import TransportIconWithFeedback from './TransportIconWithFeedback';
 import * as icons from './icons.js';
 
-import { useSelector } from 'react-redux';
-const transportState = (state) => state.transport;
+const getTransport = (state) => state.transport.data;
 
 export default function Transport() {
-  const state = useSelector(transportState);
+  const state = useSelector(getTransport);
+  // console.log(state);
 
   return (
     <View style={styles.container}>

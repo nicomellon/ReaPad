@@ -4,7 +4,7 @@ import Osc from 'react-native-osc';
 
 export default function RecordBtn({ icon, osc, active }) {
   const [pressed, setPressed] = useState(false);
-  console.log(`${osc.address} component refreshed`);
+  // console.log(`${osc.address} component refreshed`);
 
   // set default icon
   let iconSrc = icon.inactive.default;

@@ -1,7 +1,7 @@
-import * as actions from './actionTypes';
+import * as actions from '../actionTypes';
 
 const initialState = {
-  transport: {
+  data: {
     '/play': [0],
     '/pause': [0],
     '/record': [0],
@@ -16,12 +16,13 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
+  console.log(state);
   switch (action.type) {
     case actions.OSC_MSG:
       return {
         ...state,
-        transport: {
-          ...state.transport,
+        data: {
+          ...state.data,
           [action.payload.address]: action.payload.data,
         },
       };
