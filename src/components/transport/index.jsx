@@ -4,10 +4,8 @@ import TransportIcon from './TransportIcon';
 import TransportIconWithFeedback from './TransportIconWithFeedback';
 import * as icons from './icons.js';
 
-const transportSelector = (state) => state.transport.data;
-
 export default function Transport() {
-  const state = useSelector(transportSelector);
+  const state = useSelector((state) => state.transport);
   // console.log(state);
 
   return (
@@ -28,21 +26,21 @@ export default function Transport() {
       <TransportIconWithFeedback
         icon={icons.record}
         osc={{ address: '/record', args: [] }}
-        active={state['/record'][0] === 1}
+        // active={state['/record'][0] === 1}
       />
 
       {/* play button */}
       <TransportIconWithFeedback
         icon={icons.play}
         osc={{ address: '/play', args: [] }}
-        active={state['/play'][0] === 1 || state['/pause'][0] === 1}
+        // active={state['/play'][0] === 1 || state['/pause'][0] === 1}
       />
 
       {/* repeat button */}
       <TransportIconWithFeedback
         icon={icons.repeat}
         osc={{ address: '/repeat', args: [] }}
-        active={state['/repeat'][0] === 1}
+        // active={state['/repeat'][0] === 1}
       />
 
       {/* stop button */}
@@ -52,7 +50,7 @@ export default function Transport() {
       <TransportIconWithFeedback
         icon={icons.pause}
         osc={{ address: '/pause', args: [] }}
-        active={state['/pause'][0] === 1}
+        // active={state['/pause'][0] === 1}
       />
     </View>
   );

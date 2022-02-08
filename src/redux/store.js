@@ -1,6 +1,10 @@
-import { createStore } from 'redux';
-import reducer from './reducers';
+import { configureStore } from '@reduxjs/toolkit';
+import transportReducer from './transportSlice';
 
-const store = createStore(reducer);
+const store = configureStore({
+  reducer: {
+    transport: transportReducer,
+  },
+});
 
 export default store;
