@@ -2,23 +2,23 @@ import { Image, Pressable } from 'react-native';
 import { useState } from 'react';
 import Osc from 'react-native-osc';
 
-export default function EndBtn() {
+export default function TransportIcon({ icon, osc }) {
   const [pressed, setPressed] = useState(false);
 
-  const icon = pressed
-    ? require('../../assets/transport/pressed/transport_end.png')
-    : require('../../assets/transport/default/transport_end.png');
+  // set icon depending on state of UI
+  const iconSrc = pressed ? icon.pressed : icon.default;
 
+  // handlers
   const handlePressIn = () => setPressed(true);
 
   const handlePressOut = () => {
-    Osc.sendMessage('/action', [40043]);
+    Osc.sendMessage(osc.address, osc.args);
     setPressed(false);
   };
 
   return (
     <Pressable onPressIn={handlePressIn} onPressOut={handlePressOut}>
-      <Image source={icon} />
+      <Image source={iconSrc} />
     </Pressable>
   );
 }

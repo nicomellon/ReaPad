@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { StyleSheet, SafeAreaView } from 'react-native';
 
-import Transport from './components/transport/Transport';
+import Transport from './components/transport';
 
 import createOscConnection from './osc/CreateOscConnection';
 
