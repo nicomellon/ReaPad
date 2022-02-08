@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { View, StyleSheet, Image, Pressable } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../app/hooks';
 import Osc from 'react-native-osc';
-import * as icons from '../assets/transport/icons.js';
+import * as icons from '../../assets/transport/icons.js';
 
 function TransportIcon({ icon, osc }) {
   const [pressed, setPressed] = useState(false);
@@ -27,7 +27,7 @@ function TransportIcon({ icon, osc }) {
 
 function TransportIconWithFeedback({ icon, osc, active }) {
   const [pressed, setPressed] = useState(false);
-  // console.log(`component ${osc.address} rendered`);
+  console.log(`component ${osc.address} rendered`);
 
   // set default icon
   let iconSrc = icon.inactive.default;
@@ -52,7 +52,9 @@ function TransportIconWithFeedback({ icon, osc, active }) {
 }
 
 export default function Transport() {
-  const state = useSelector((state) => state.transport);
+  const { playing, recording, paused, repeat } = useAppSelector(
+    (state) => state.transport
+  );
 
   return (
     <View style={styles.container}>
@@ -72,21 +74,21 @@ export default function Transport() {
       <TransportIconWithFeedback
         icon={icons.record}
         osc={{ address: '/record', args: [] }}
-        active={state['/record'][0] === 1}
+        active={recording}
       />
 
       {/* play button */}
       <TransportIconWithFeedback
         icon={icons.play}
         osc={{ address: '/play', args: [] }}
-        active={state['/play'][0] === 1 || state['/pause'][0] === 1}
+        active={playing || paused}
       />
 
       {/* repeat button */}
       <TransportIconWithFeedback
         icon={icons.repeat}
         osc={{ address: '/repeat', args: [] }}
-        active={state['/repeat'][0] === 1}
+        active={repeat}
       />
 
       {/* stop button */}
@@ -96,7 +98,7 @@ export default function Transport() {
       <TransportIconWithFeedback
         icon={icons.pause}
         osc={{ address: '/pause', args: [] }}
-        active={state['/pause'][0] === 1}
+        active={paused}
       />
     </View>
   );
