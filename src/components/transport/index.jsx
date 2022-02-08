@@ -4,10 +4,10 @@ import TransportIcon from './TransportIcon';
 import TransportIconWithFeedback from './TransportIconWithFeedback';
 import * as icons from './icons.js';
 
-const getTransport = (state) => state.transport.data;
+const transportSelector = (state) => state.transport.data;
 
 export default function Transport() {
-  const state = useSelector(getTransport);
+  const state = useSelector(transportSelector);
   // console.log(state);
 
   return (

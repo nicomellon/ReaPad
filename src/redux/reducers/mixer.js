@@ -5,7 +5,6 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
-  console.log(state);
   switch (action.type) {
     case actions.OSC_MSG:
       return {
