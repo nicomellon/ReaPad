@@ -4,7 +4,13 @@ import * as icons from '../../assets/transport/icons.js';
 import { useState } from 'react';
 import Osc from 'react-native-osc';
 
-export function ReaperIcon({ icon, osc }) {
+export function ReaperIcon({
+  icon,
+  osc,
+}: {
+  icon: { default: number; pressed: number };
+  osc: { address: string; args: any[] };
+}) {
   const [pressed, setPressed] = useState(false);
 
   // set icon depending on state of UI
@@ -25,7 +31,18 @@ export function ReaperIcon({ icon, osc }) {
   );
 }
 
-export function ReaperIconWithFeedback({ icon, osc, active }) {
+export function ReaperIconWithFeedback({
+  icon,
+  osc,
+  active,
+}: {
+  icon: {
+    inactive: { default: number; pressed: number };
+    active: { default: number; pressed: number };
+  };
+  osc: { address: string; args: any[] };
+  active: boolean;
+}) {
   const [pressed, setPressed] = useState(false);
   console.log(`component ${osc.address} rendered`);
 
@@ -51,7 +68,7 @@ export function ReaperIconWithFeedback({ icon, osc, active }) {
   );
 }
 
-export default function Reaper() {
+export default function Transport() {
   const { playing, recording, paused, repeat } = useAppSelector(
     (state) => state.transport
   );
