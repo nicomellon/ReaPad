@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { StyleSheet, SafeAreaView } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 import createOscConnection from './app/osc';
@@ -12,12 +12,12 @@ export default function App() {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Provider store={store}>
         <Transport />
         <Mixer />
       </Provider>
-    </SafeAreaView>
+    </View>
   );
 }
 
