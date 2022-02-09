@@ -4,11 +4,11 @@ import Slider from '@react-native-community/slider';
 import Osc from 'react-native-osc';
 import * as icons from '../../assets/mixer/icons';
 
-const Fader = () => {
+const Fader = ({ trackNum }) => {
   const [value, setValue] = useState(0.716);
 
   const handleValueChange = (e: number) => {
-    Osc.sendMessage('/master/volume', [e]);
+    Osc.sendMessage(`/track/${trackNum}/volume`, [e]);
   };
 
   return (
@@ -60,14 +60,14 @@ const MasterChannelStrip = ({ trackNum }) => {
       </View>
       <View style={styles.column}>
         <View style={styles.faderDiv}>
-          <Fader />
+          <Fader trackNum={trackNum} />
         </View>
         <View style={styles.row}>
           <ReaperToggleIcon
             trackNum={trackNum}
             icon={icons.mute}
             oscAction={'mute'}
-            active={true}
+            active={false}
           />
           <ReaperToggleIcon
             trackNum={trackNum}
@@ -94,14 +94,14 @@ const ChannelStrip = ({ trackNum }) => {
       </View>
       <View style={styles.column}>
         <View style={styles.faderDiv}>
-          <Fader />
+          <Fader trackNum={trackNum} />
         </View>
         <View style={styles.row}>
           <ReaperToggleIcon
             trackNum={trackNum}
             icon={icons.mute}
             oscAction={'mute'}
-            active={true}
+            active={false}
           />
           <ReaperToggleIcon
             trackNum={trackNum}
