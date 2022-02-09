@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 import createOscConnection from './app/osc';
 import Transport from './features/transport/Transport';
+import Mixer from './features/mixer/Mixer';
 
 export default function App() {
   useEffect(() => {
@@ -11,11 +12,12 @@ export default function App() {
   }, []);
 
   return (
-    <Provider store={store}>
-      <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <Provider store={store}>
         <Transport />
-      </View>
-    </Provider>
+        <Mixer />
+      </Provider>
+    </SafeAreaView>
   );
 }
 

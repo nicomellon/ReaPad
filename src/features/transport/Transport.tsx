@@ -1,10 +1,10 @@
-import { useState } from 'react';
 import { View, StyleSheet, Image, Pressable } from 'react-native';
 import { useAppSelector } from '../../app/hooks';
-import Osc from 'react-native-osc';
 import * as icons from '../../assets/transport/icons.js';
+import { useState } from 'react';
+import Osc from 'react-native-osc';
 
-function TransportIcon({ icon, osc }) {
+export function ReaperIcon({ icon, osc }) {
   const [pressed, setPressed] = useState(false);
 
   // set icon depending on state of UI
@@ -25,7 +25,7 @@ function TransportIcon({ icon, osc }) {
   );
 }
 
-function TransportIconWithFeedback({ icon, osc, active }) {
+export function ReaperIconWithFeedback({ icon, osc, active }) {
   const [pressed, setPressed] = useState(false);
   console.log(`component ${osc.address} rendered`);
 
@@ -51,7 +51,7 @@ function TransportIconWithFeedback({ icon, osc, active }) {
   );
 }
 
-export default function Transport() {
+export default function Reaper() {
   const { playing, recording, paused, repeat } = useAppSelector(
     (state) => state.transport
   );
@@ -59,43 +59,43 @@ export default function Transport() {
   return (
     <View style={styles.container}>
       {/* home button */}
-      <TransportIcon
+      <ReaperIcon
         icon={icons.home}
         osc={{ address: '/action', args: [40042] }}
       />
 
       {/* end button */}
-      <TransportIcon
+      <ReaperIcon
         icon={icons.end}
         osc={{ address: '/action', args: [40043] }}
       />
 
       {/* record button */}
-      <TransportIconWithFeedback
+      <ReaperIconWithFeedback
         icon={icons.record}
         osc={{ address: '/record', args: [] }}
         active={recording}
       />
 
       {/* play button */}
-      <TransportIconWithFeedback
+      <ReaperIconWithFeedback
         icon={icons.play}
         osc={{ address: '/play', args: [] }}
         active={playing || paused}
       />
 
       {/* repeat button */}
-      <TransportIconWithFeedback
+      <ReaperIconWithFeedback
         icon={icons.repeat}
         osc={{ address: '/repeat', args: [] }}
         active={repeat}
       />
 
       {/* stop button */}
-      <TransportIcon icon={icons.stop} osc={{ address: '/stop', args: [] }} />
+      <ReaperIcon icon={icons.stop} osc={{ address: '/stop', args: [] }} />
 
       {/* pause button */}
-      <TransportIconWithFeedback
+      <ReaperIconWithFeedback
         icon={icons.pause}
         osc={{ address: '/pause', args: [] }}
         active={paused}
