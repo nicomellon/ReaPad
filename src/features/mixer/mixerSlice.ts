@@ -28,7 +28,6 @@ export const mixerSlice = createSlice({
       state,
       action: PayloadAction<{ address: string; data: number[] }>
     ) => {
-      console.log(state);
       state.master[action.payload.address] = action.payload.data[0];
     },
   },
