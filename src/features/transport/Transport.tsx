@@ -69,9 +69,7 @@ export function ReaperIconWithFeedback({
 }
 
 export default function Transport() {
-  const { playing, recording, paused, repeat } = useAppSelector(
-    (state) => state.transport
-  );
+  const state = useAppSelector((state) => state.transport);
 
   return (
     <View style={styles.container}>
@@ -91,21 +89,21 @@ export default function Transport() {
       <ReaperIconWithFeedback
         icon={icons.record}
         osc={{ address: '/record', args: [] }}
-        active={recording}
+        active={state['/record']}
       />
 
       {/* play button */}
       <ReaperIconWithFeedback
         icon={icons.play}
         osc={{ address: '/play', args: [] }}
-        active={playing || paused}
+        active={state['/play'] || state['/pause']}
       />
 
       {/* repeat button */}
       <ReaperIconWithFeedback
         icon={icons.repeat}
         osc={{ address: '/repeat', args: [] }}
-        active={repeat}
+        active={state['/repeat']}
       />
 
       {/* stop button */}
@@ -115,7 +113,7 @@ export default function Transport() {
       <ReaperIconWithFeedback
         icon={icons.pause}
         osc={{ address: '/pause', args: [] }}
-        active={paused}
+        active={state['/pause']}
       />
     </View>
   );

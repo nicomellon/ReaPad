@@ -1,12 +1,7 @@
 import { NativeEventEmitter } from 'react-native';
 import Osc from 'react-native-osc';
 import { store } from './store';
-import {
-  setPlaying,
-  setPaused,
-  setRecording,
-  setRepeat,
-} from '../features/transport/transportSlice';
+import { setTransport } from '../features/transport/transportSlice';
 
 //OSC server IP address and port
 const SEND_ADDRESS = 'localhost';
@@ -19,18 +14,16 @@ export default function createOscConnection() {
 
   //subscribe to GotMessage event to receive OSC messages
   eventEmitter.addListener('GotMessage', (oscMessage) => {
+    // console.log(oscMessage.address.startsWith('/master'));
     switch (oscMessage.address) {
       case '/play':
-        store.dispatch(setPlaying(oscMessage.data));
-        break;
       case '/pause':
-        store.dispatch(setPaused(oscMessage.data));
-        break;
       case '/record':
-        store.dispatch(setRecording(oscMessage.data));
-        break;
       case '/repeat':
-        store.dispatch(setRepeat(oscMessage.data));
+        store.dispatch(setTransport(oscMessage));
+        break;
+      case oscMessage.address.startsWith('/master'):
+        console.log(oscMessage);
         break;
       default:
         break;

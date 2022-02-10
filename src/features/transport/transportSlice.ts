@@ -1,40 +1,34 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface TransportState {
-  playing: boolean;
-  recording: boolean;
-  paused: boolean;
-  repeat: boolean;
+  '/play': boolean;
+  '/record': boolean;
+  '/pause': boolean;
+  '/repeat': boolean;
 }
 
 const initialState: TransportState = {
-  playing: false,
-  recording: false,
-  paused: false,
-  repeat: false,
+  '/play': false,
+  '/record': false,
+  '/pause': false,
+  '/repeat': false,
 };
 
 export const transportSlice = createSlice({
   name: 'transport',
   initialState,
   reducers: {
-    setPlaying: (state, action) => {
-      state.playing = action.payload[0] === 1 ? true : false;
-    },
-    setRecording: (state, action) => {
-      state.recording = action.payload[0] === 1 ? true : false;
-    },
-    setPaused: (state, action) => {
-      state.paused = action.payload[0] === 1 ? true : false;
-    },
-    setRepeat: (state, action) => {
-      state.repeat = action.payload[0] === 1 ? true : false;
+    setTransport: (
+      state,
+      action: PayloadAction<{ address: string; data: number[] }>
+    ) => {
+      state[action.payload.address] =
+        action.payload.data[0] === 1 ? true : false;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setPlaying, setPaused, setRecording, setRepeat } =
-  transportSlice.actions;
+export const { setTransport } = transportSlice.actions;
 
 export default transportSlice.reducer;
