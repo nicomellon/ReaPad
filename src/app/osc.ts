@@ -2,7 +2,7 @@ import { NativeEventEmitter } from 'react-native';
 import Osc from 'react-native-osc';
 import { store } from './store';
 import { setTransport } from '../features/transport/transportSlice';
-import { setMaster } from '../features/mixer/mixerSlice';
+import { setMaster, setTrack } from '../features/mixer/mixerSlice';
 
 //OSC server IP address and port
 const SEND_ADDRESS = 'localhost';
@@ -15,20 +15,22 @@ export default function createOscConnection() {
 
   //subscribe to GotMessage event to receive OSC messages
   eventEmitter.addListener('GotMessage', (oscMessage) => {
-    // console.log(oscMessage.address.startsWith('/master'));
-    switch (oscMessage.address) {
-      case '/play':
-      case '/pause':
-      case '/record':
-      case '/repeat':
+    switch (true) {
+      case ['/play', '/pause', '/record', '/repeat'].includes(
+        oscMessage.address
+      ):
         store.dispatch(setTransport(oscMessage));
         break;
-      case '/master/volume':
-      case '/master/pan':
-      case '/master/vu':
-      case '/master/L':
-      case '/master/R':
+      case oscMessage.address.startsWith('/master'):
         store.dispatch(setMaster(oscMessage));
+        break;
+      case /track\/([0-9])*\/.*/.test(oscMessage.address):
+        const stripPrefix = oscMessage.address.slice(7);
+        const trackNum = stripPrefix.split('/')[0];
+
+        oscMessage.data.unshift(trackNum);
+
+        store.dispatch(setTrack(oscMessage));
         break;
       default:
         break;

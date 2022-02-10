@@ -49,7 +49,6 @@ const ReaperToggleIcon = ({
   trackNum,
   icon,
   oscAction,
-  active,
 }: {
   trackNum: number;
   icon: {
@@ -57,9 +56,10 @@ const ReaperToggleIcon = ({
     active: { default: number; pressed: number };
   };
   oscAction: string;
-  active: boolean;
 }) => {
   const [pressed, setPressed] = useState(false);
+  const [active, setActive] = useState(false);
+
   const oscArg = active ? 0 : 1;
 
   // update icon depending on state
@@ -73,6 +73,7 @@ const ReaperToggleIcon = ({
   const handlePressOut = () => {
     Osc.sendMessage(`/track/${trackNum}/${oscAction}`, [oscArg]);
     setPressed(false);
+    setActive(!active);
   };
 
   return (
@@ -83,8 +84,7 @@ const ReaperToggleIcon = ({
 };
 
 const MasterChannelStrip = ({ trackNum }: { trackNum: number }) => {
-  const state = useAppSelector((state) => state.mixer);
-  console.log(state);
+  const state = useAppSelector((state) => state.mixer.master);
 
   return (
     <View style={styles.master}>
@@ -92,8 +92,8 @@ const MasterChannelStrip = ({ trackNum }: { trackNum: number }) => {
       <View style={styles.faderDiv}>
         <Fader
           trackNum={trackNum}
-          volume={state.master['/master/volume']}
-          VU={state.master['/master/vu']}
+          volume={state['/master/volume']}
+          VU={state['/master/vu']}
         />
       </View>
       <View style={styles.muteSolo}>
@@ -101,13 +101,11 @@ const MasterChannelStrip = ({ trackNum }: { trackNum: number }) => {
           trackNum={trackNum}
           icon={icons.mute}
           oscAction={'mute'}
-          active={false}
         />
         <ReaperToggleIcon
           trackNum={trackNum}
           icon={icons.solo}
           oscAction={'solo'}
-          active={false}
         />
       </View>
       <View style={styles.masterFooter}>
@@ -118,24 +116,28 @@ const MasterChannelStrip = ({ trackNum }: { trackNum: number }) => {
 };
 
 const ChannelStrip = ({ trackNum }: { trackNum: number }) => {
+  const state = useAppSelector((state) => state.mixer.tracks[trackNum]);
+
   return (
     <View style={styles.channel}>
       <View style={styles.trackHeader}></View>
       <View style={styles.faderDiv}>
-        <Fader trackNum={trackNum} volume={0.716} />
+        <Fader
+          trackNum={trackNum}
+          volume={state[`/track/${trackNum}/volume`]}
+          VU={state[`/track/${trackNum}/vu`]}
+        />
       </View>
       <View style={styles.muteSolo}>
         <ReaperToggleIcon
           trackNum={trackNum}
           icon={icons.mute}
           oscAction={'mute'}
-          active={false}
         />
         <ReaperToggleIcon
           trackNum={trackNum}
           icon={icons.solo}
           oscAction={'solo'}
-          active={false}
         />
       </View>
       <View style={styles.trackFooter}>
