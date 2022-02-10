@@ -2,6 +2,7 @@ import { NativeEventEmitter } from 'react-native';
 import Osc from 'react-native-osc';
 import { store } from './store';
 import { setTransport } from '../features/transport/transportSlice';
+import { setMaster } from '../features/mixer/mixerSlice';
 
 //OSC server IP address and port
 const SEND_ADDRESS = 'localhost';
@@ -27,7 +28,7 @@ export default function createOscConnection() {
       case '/master/vu':
       case '/master/L':
       case '/master/R':
-        console.log(oscMessage);
+        store.dispatch(setMaster(oscMessage));
         break;
       default:
         break;

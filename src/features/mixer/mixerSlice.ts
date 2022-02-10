@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { create } from 'react-test-renderer';
 
 interface MixerState {
   master: {
@@ -12,11 +11,13 @@ interface MixerState {
 }
 
 const initialState: MixerState = {
-  '/master/volume': 0,
-  '/master/pan': 0,
-  '/master/vu': 0,
-  '/master/vu/L': 0,
-  '/master/vu/R': 0,
+  master: {
+    '/master/volume': 0.716,
+    '/master/pan': 0.5,
+    '/master/vu': 0,
+    '/master/vu/L': 0,
+    '/master/vu/R': 0,
+  },
 };
 
 export const mixerSlice = createSlice({
@@ -27,6 +28,7 @@ export const mixerSlice = createSlice({
       state,
       action: PayloadAction<{ address: string; data: number[] }>
     ) => {
+      console.log(state);
       state.master[action.payload.address] = action.payload.data[0];
     },
   },
