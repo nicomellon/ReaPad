@@ -2,9 +2,9 @@ import { Text, View, StyleSheet, Image, Pressable } from 'react-native';
 import React, { useState } from 'react';
 import Slider from '@react-native-community/slider';
 import Osc from 'react-native-osc';
-import * as icons from '../../assets/mixer/icons';
+import * as icons from '../../assets/mixer/mixerIcons';
 
-const Fader = ({ trackNum }) => {
+const Fader = ({ trackNum }: { trackNum: number }) => {
   const [value, setValue] = useState(0.716);
 
   const handleValueChange = (e: number) => {
@@ -26,9 +26,22 @@ const Fader = ({ trackNum }) => {
   );
 };
 
-const ReaperToggleIcon = ({ trackNum, icon, oscAction, active }) => {
+const ReaperToggleIcon = ({
+  trackNum,
+  icon,
+  oscAction,
+  active,
+}: {
+  trackNum: number;
+  icon: {
+    inactive: { default: number; pressed: number };
+    active: { default: number; pressed: number };
+  };
+  oscAction: string;
+  active: boolean;
+}) => {
   const [pressed, setPressed] = useState(false);
-  const oscValue = active ? 0 : 1;
+  const oscArg = active ? 0 : 1;
 
   // set default icon
   let iconSrc = icon.inactive.default;
@@ -41,7 +54,7 @@ const ReaperToggleIcon = ({ trackNum, icon, oscAction, active }) => {
   const handlePressIn = () => setPressed(true);
 
   const handlePressOut = () => {
-    Osc.sendMessage(`/track/${trackNum}/${oscAction}`, [oscValue]);
+    Osc.sendMessage(`/track/${trackNum}/${oscAction}`, [oscArg]);
     setPressed(false);
   };
 
@@ -52,7 +65,7 @@ const ReaperToggleIcon = ({ trackNum, icon, oscAction, active }) => {
   );
 };
 
-const MasterChannelStrip = ({ trackNum }) => {
+const MasterChannelStrip = ({ trackNum }: { trackNum: number }) => {
   return (
     <View style={styles.master}>
       <View style={styles.darkGrey}>
@@ -86,7 +99,7 @@ const MasterChannelStrip = ({ trackNum }) => {
   );
 };
 
-const ChannelStrip = ({ trackNum }) => {
+const ChannelStrip = ({ trackNum }: { trackNum: number }) => {
   return (
     <View style={styles.channel}>
       <View style={styles.grey}>
