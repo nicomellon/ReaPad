@@ -44,7 +44,6 @@ export function ReaperIconWithFeedback({
   active: boolean;
 }) {
   const [pressed, setPressed] = useState(false);
-  console.log(`component ${osc.address} rendered`);
 
   // set default icon
   let iconSrc = icon.inactive.default;

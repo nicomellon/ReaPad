@@ -22,7 +22,11 @@ export default function createOscConnection() {
       case '/repeat':
         store.dispatch(setTransport(oscMessage));
         break;
-      case oscMessage.address.startsWith('/master'):
+      case '/master/volume':
+      case '/master/pan':
+      case '/master/vu':
+      case '/master/L':
+      case '/master/R':
         console.log(oscMessage);
         break;
       default:
